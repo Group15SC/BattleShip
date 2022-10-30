@@ -1,11 +1,9 @@
 public class Board {
-    private int sizeX;
-    private int sizeY;
-    Point matrix[][];
+    final int sizeX = 10;
+    final int sizeY = 10;
+    Point [][]matrix;
 
-    public Board(int sizeX, int sizeY) {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
+    public Board() {
         fillBoard(sizeX, sizeY);
     }
 
