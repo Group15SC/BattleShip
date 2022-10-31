@@ -13,8 +13,8 @@ public class Ship {
     public boolean isPlacementOk(Ship ship1, List<Ship> ships, Board board) {
         int count = 0;
         for(int i= 0; i< ship1.getFields().size(); i++) {
-            if(ship1.getFields().get(i).getY() > board.getSizeY() ||
-                    ship1.getFields().get(i).getX() > board.getSizeX()) {
+            if((ship1.getFields().get(i).getY() > 10) ||
+                    (ship1.getFields().get(i).getX() > 10)) {
                 count++ ;
             }
             for(int k = 0; k < ships.size();k++) {

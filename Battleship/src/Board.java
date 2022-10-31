@@ -1,25 +1,19 @@
 public class Board {
-    final int sizeX = 10;
-    final int sizeY = 10;
+    final int width = 10;
+    final int height = 10;
     Point [][]matrix;
 
     public Board() {
-        fillBoard(sizeX, sizeY);
+        fillBoard(width, height);
     }
 
-    public int getSizeX() {
-        return sizeX;
-    }
-    public int getSizeY() {
-        return sizeY;
-    }
 
     public Point getPoint(int x, int y){
         return matrix[x][y];
     }
 
     public Point[][] fillBoard(int x, int y) {
-        matrix = new Point[sizeX][sizeY];
+        matrix = new Point[width][height];
         for (int row=0; row< x; row++) {
             for(int col= 0; col< y; col++) {
                 matrix[row][col] = new Point(row,col,PointStatus.EMPTY);

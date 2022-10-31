@@ -7,7 +7,8 @@ public class Input {
     private Scanner scanner = new Scanner(System.in);
     private List<Board> boards = new ArrayList<>();
     int choice;
-    List<Integer> CoordinatesAndShipType = new ArrayList<>();
+    List<Point> StartingAndEndingPointForShip = new ArrayList<>();
+
     List<Ship> Ships = new ArrayList<>();
 
     public List<Board> getBoards() {
@@ -19,30 +20,63 @@ public class Input {
 
     }
 
-
-    public int getIntegerMenuOption() {
-        choice = scanner.nextInt();
-        scanner.nextLine();
-        return choice;
-
+    private Integer TransferToNumber(char Character) {
+        if (Character == 'A') {
+            return 0;
+        }
+        else if(Character == 'B') {
+            return 1;
+        }
+        else if(Character == 'C') {
+            return 2;
+        }
+        else if(Character == 'D') {
+            return 3;
+        }
+        else if(Character == 'E') {
+            return 4;
+        }
+        else if(Character == 'F') {
+            return 5;
+        }
+        else if(Character == 'G') {
+            return 6;
+        }
+        else if(Character == 'H') {
+            return 7;
+        }
+        else if(Character == 'I') {
+            return 8;
+        }
+        else {
+            return 9;
+        }
     }
 
-    private List<Integer> AskCoordForShipAndType() {
-        this.CoordinatesAndShipType = new ArrayList<>();
-        System.out.println("select row : for starting point");
+    private List<Point> AskStartingAndEndingPointForShip() {
+        this.StartingAndEndingPointForShip = new ArrayList<>();
+
+        System.out.println("Select row for the starting coordinator of the ship: ");
         int row_starting = scanner.nextInt();
         scanner.nextLine();
-        System.out.println("select column: for starting point");
-        int col_starting = scanner.nextInt();
+        System.out.println("Select column for the starting coordinator of the ship: ");
+        int col_starting = TransferToNumber(scanner.next().charAt(0));
         scanner.nextLine();
-        System.out.println("");
-//        int shipType = scanner.nextInt();
-        CoordinatesAndShipType.add(row);
-        CoordinatesAndShipType.add(col);
-        CoordinatesAndShipType.add(shipType);
-        return CoordinatesAndShipType;
+        Point starting_point = new Point(row_starting, col_starting, PointStatus.SHIP);
+        StartingAndEndingPointForShip.add(starting_point);
 
+        System.out.println("Select row for the Ending coordinator of the ship: ");
+        int row_ending = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Select column for the Ending coordinator of the ship: ");
+        int col_ending = TransferToNumber(scanner.next().charAt(0));
+        scanner.nextLine();
+        Point ending_point = new Point(row_ending, col_ending, PointStatus.SHIP);
+        StartingAndEndingPointForShip.add(ending_point);
+
+        return StartingAndEndingPointForShip;
     }
+
 
     public Ship createShip(int player) {
         int GamePlayer = player + 1;
@@ -58,19 +92,15 @@ public class Input {
         boards.get(player).placeShip(shipPart, ship);
         return ship;
     }
+    public List<Point> CreateShip(int player) {
 
+    }
 
     public void generateBoard() {
-        System.out.println("select height: ");
-        int x = scanner.nextInt();
-        scanner.nextLine();
-        System.out.println("select width: ");
-        int y = scanner.nextInt();
-        Board board1 = new Board(x, y);
-        Board board2 = new Board(x, y);
+        Board board1 = new Board();
+        Board board2 = new Board();
         boards.add(board1);
         boards.add(board2);
-
     }
 
     public int[] shoot(int player) {
