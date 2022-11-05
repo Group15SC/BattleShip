@@ -1,10 +1,12 @@
 import java.util.List;
 
 public class Grid {
-    final int width = 10;
+    int width = 10;
 
-    final int height = 10;
+    int height = 10;
     Point [][]matrix;
+
+
 
     public Grid() {
         fillGrid(width, height);

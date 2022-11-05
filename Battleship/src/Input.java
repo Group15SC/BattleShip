@@ -17,7 +17,7 @@ public class Input {
 
     public Input() {
         PlaceShipCarrier();
-        PlaceShipBattleship();
+        //PlaceShipBattleship();
         //PlaceShipPatrolBoat();
         //PlaceShipSubmarine();
     }
@@ -32,19 +32,20 @@ public class Input {
         Boolean Flag;
         Flag = true;
         while(Flag) {
-            System.out.println("Select row for the starting coordinator of the ship: ");
-            int row_starting = scanner.nextInt();
-            scanner.nextLine();
             System.out.println("Select column for the starting coordinator of the ship: ");
             int col_starting = TransferToNumber(scanner.next().charAt(0));
             scanner.nextLine();
-
-            System.out.println("Select row for the Ending coordinator of the ship: ");
-            int row_ending = scanner.nextInt();
+            System.out.println("Select row for the starting coordinator of the ship: ");
+            int row_starting = scanner.nextInt();
             scanner.nextLine();
+
             System.out.println("Select column for the Ending coordinator of the ship: ");
             int col_ending = TransferToNumber(scanner.next().charAt(0));
             scanner.nextLine();
+            System.out.println("Select row for the Ending coordinator of the ship: ");
+            int row_ending = scanner.nextInt();
+            scanner.nextLine();
+
 
             if(col_starting == col_ending && col_ending <= 10 && row_ending <= 10 && row_starting <= 10) {
                 l = Math.abs(row_starting - row_ending);

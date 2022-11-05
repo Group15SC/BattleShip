@@ -17,7 +17,11 @@ public class Point {
         this.pointStatus = pointStatus;
     }
 
-
+    public void setPoint(int x, int y, PointStatus pointStatus) {
+        this.x = x;
+        this.y = y;
+        this.pointStatus = pointStatus;
+    }
 
     public int getX() {
         return x;
