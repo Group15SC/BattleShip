@@ -10,29 +10,20 @@ public class Ship {
         this.shipType = shipType;
     }
 
-    public boolean isPlacementOk(Ship ship1, List<Ship> ships, Board board) {
-        int count = 0;
-        for(int i= 0; i< ship1.getFields().size(); i++) {
-            if(ship1.getFields().get(i).getY() > board.getSizeY() ||
-                    ship1.getFields().get(i).getX() > board.getSizeX()) {
-                count++ ;
-            }
-            for(int k = 0; k < ships.size();k++) {
-                for(int z= 0; z< ships.get(k).getFields().size(); z++) {
-                    if((ship1.getFields().get(i).getX() == ships.get(k).getFields().get(z).getX() &&
-                            ship1.getFields().get(i).getY() == ships.get(k).getFields().get(z).getY())) {
-                        count ++ ;
+    public boolean isPlacementOk(Ship ship1, List<Ship> ships) {
+        boolean Flag = true;
+        for(int i = 0; i < ships.size(); i++) {
+            for(int j = 0; j < ships.get(i).getFields().size(); j++) {
+                for(int k = 0; k < ship1.getFields().size(); k++) {
+                    if((ship1.getFields().get(k).getX() == ships.get(i).getFields().get(j).getX() &&
+                            ship1.getFields().get(k).getY() == ships.get(i).getFields().get(j).getY())) {
+                        Flag = false;
                     }
                 }
             }
         }
-        if (count == 0) {
-            return true;
-        }
-        return false;
+        return Flag;
     }
-
-
 
 
 
@@ -45,7 +36,6 @@ public class Ship {
     public List<Point> getFields() {
         return NewShip;
     }
-
 
 
 

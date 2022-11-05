@@ -1,6 +1,9 @@
 public enum PointStatus {
     EMPTY,
-    SHIP,
+    CARRIER,
+    BATTLESHIP,
+    SUBMARINE,
+    PATROLBOAT,
     HIT,
     MISSED,
     SUNK;
