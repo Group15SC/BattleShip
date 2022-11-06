@@ -60,33 +60,42 @@ public class Point {
 //        return target;
 //    }
 
-    public char getCharacter() {
-        char result=' ';
+    public String getCharacter() {
+        String result= " ";
         switch (pointStatus) {
 
             case EMPTY :
-                result = 'E';
+                result = "E";
                 break;
             case HIT:
-                result = 'H';
+                result = "H";
                 break;
             case CARRIER:
-                result = 'C';
+                result = "C";
                 break;
             case BATTLESHIP:
-                result = 'B';
+                result = "B";
                 break;
             case SUBMARINE:
-                result = 'S';
+                result = "S";
                 break;
             case PATROLBOAT:
-                result = 'P';
+                result = "P";
                 break;
-            case SUNK:
-                result = 'K';
+            case SUNKC:
+                result = "KC";
+                break;
+            case SUNKB:
+                result = "KB";
+                break;
+            case SUNKP:
+                result = "KP";
+                break;
+            case SUNKS:
+                result = "KS";
                 break;
             case MISSED:
-                result = 'M';
+                result = "M";
                 break;
         }
         return result;

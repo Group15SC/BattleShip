@@ -6,5 +6,8 @@ public enum PointStatus {
     PATROLBOAT,
     HIT,
     MISSED,
-    SUNK;
+    SUNKB,
+    SUNKC,
+    SUNKS,
+    SUNKP,
 }

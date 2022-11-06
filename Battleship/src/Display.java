@@ -29,23 +29,33 @@ public class Display {
 
     private void playermiddlepart(Grid grid, int x, int y) {
         switch (grid.getPoint(x, y).getCharacter()) {
-            case 'E': // if the point is empty, print space
+            case "E": // if the point is empty, print space
                 System.out.print(" " + "|");
                 break;
-            case 'H': // if the point is hit, print X
+            case "H": // if the point is hit, print X
                 System.out.print("X" + "|");
                 break;
-            case 'M': // if the bomb missed, print o
+            case "M": // if the bomb missed, print o
                 System.out.print("o" + "|");
                 break;
-            case 'C':
-            case 'B':
-            case 'S':
-            case 'P':
+            case "C":
+            case "B":
+            case "S":
+            case "P":
                 System.out.print(grid.getPoint(x, y).getCharacter() + "|"); // need to replace!!!
                 break;
-            case 'K': // for the ships that is sunk, print the initial character
-                System.out.print("*" + "|");
+            case "KC":// for the ships that is sunk, print the initial character
+                System.out.print("C" + "|");
+                break;
+            case "KB":
+                System.out.print("B" + "|");
+                break;
+            case "KP":
+                System.out.print("P" + "|");
+                break;
+            case "KS":
+                System.out.print("S" + "|");
+                break;
 //                ShipType type;
 //                Game game = new Game();
 //                type = game.getShip(grid.getPoint(x, y), "human").getShipType();
@@ -59,7 +69,6 @@ public class Display {
 //                    case PATROLBOAT:
 //                        System.out.print("P" + "|");
 //                }
-                break;
             default:
                 System.out.print(" " + "|");
         }
@@ -67,35 +76,46 @@ public class Display {
 
     private void computermiddlepart(Grid grid, int x, int y) {
         switch (grid.getPoint(x, y).getCharacter()) {
-            case 'E':
+            case "E":
                 System.out.print(" "+"|");
                 break;// if the point is empty or placed, print space
-            case 'C':
-            case 'B':
-            case 'S':
-            case 'P':
+            case "C":
+            case "B":
+            case "S":
+            case "P":
                 System.out.print("@"+"|");
                 break;
-            case 'H': // if the point is hit, print X
+            case "H": // if the point is hit, print X
                 System.out.print("X"+"|");
                 break;
-            case 'M': // if the bomb missed, print o
+            case "M": // if the bomb missed, print o
                 System.out.print("o"+"|");
                 break;
-            case 'K': // for the ships that is sunk, print the initial character (how?)
-                ShipType type;
-                Game game = new Game();
-                type = game.getShip(grid.getPoint(x, y), "computer").getShipType();
-                switch (type){
-                    case CARRIER:
-                        System.out.print("C"+"|");
-                    case BATTLESHIP:
-                        System.out.print("B"+"|");
-                    case SUBMARINE:
-                        System.out.print("S"+"|");
-                    case PATROLBOAT:
-                        System.out.print("P"+"|");
-                } break;
+            case "KC":// for the ships that is sunk, print the initial character
+                System.out.print("C" + "|");
+                break;
+            case "KB":
+                System.out.print("B" + "|");
+                break;
+            case "KP":
+                System.out.print("P" + "|");
+                break;
+            case "KS":
+                System.out.print("S" + "|");
+                break;
+            //case 'K': // for the ships that is sunk, print the initial character (how?)
+                //ShipType type;
+//                type = Toolkit.getShip(grid.getPoint(x, y), ).getShipType();
+//                switch (type){
+//                    case CARRIER:
+//                        System.out.print("C"+"|");
+//                    case BATTLESHIP:
+//                        System.out.print("B"+"|");
+//                    case SUBMARINE:
+//                        System.out.print("S"+"|");
+//                    case PATROLBOAT:
+//                        System.out.print("P"+"|");
+//                } break;
             default:
                 System.out.print(" " + "|");
         }

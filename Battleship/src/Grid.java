@@ -20,10 +20,12 @@ public class Grid {
         matrix = new Point[width][height];
         for (int row = 0; row < x; row++) {
             for(int col = 0; col < y; col++) {
-                matrix[row][col] = new Point(row, col, PointStatus.EMPTY); ///?????
+                matrix[row][col] = new Point(row, col, PointStatus.EMPTY);
             }
         }
         return  matrix;
     }
+
+
 
 }
