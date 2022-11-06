@@ -1,20 +1,15 @@
 //import java.util.List;
-//import java.util.concurrent.CountDownLatch;
-//import java.util.concurrent.CountedCompleter;
 //
 ////import javafx.scene.effect.Light.Point;
 //
 //
 //public class Logic{
-//    private int remainingShips = 0;
-//    private Grid grid;
 //    private Ship ship;
-//    private Point point;
-//
+//    private static Grid grid;
 //
 //    public Logic(List<Ship>ships,Grid gird){
-//        this.ships = ships;
-//        this.grid = grid;
+//        Logic.ships = ships;
+//        Logic.grid = grid;
 //    }
 //
 //    public Grid getgrid() {
@@ -25,79 +20,70 @@
 //        return point;
 //    }
 //
+//    public static ship getship(string side){
+//
+//        boolean handleShot(int x ,int y ){
+//            if(side == "human"){
 //
 //
-//    public boolean handleShot(int x, int y) {
-//        for (Ship ship : ships) {
-//            for(Point point : ship.getFields()) {
-//                if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.CARRIER && Count(point.pointstatus(CARRIER))<5)) {
-//                    point.setPointStatus(PointStatus.HIT);
-//                    grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
-//                    System.out.println("X");
-//                    return true;
-//                }
-//                if (point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.CARRIER && Count(Point.pointstatus(CARRIER)) == 5)) {
-//                    Point.setPointStatus(PointStatus.SUNK); ///get the list of the ship
-//                    grid.getPoint().setPointStatus(PointStatus.SUNK);
-//                    System.out.println("C");
-//                    return true;
-//                }
-//                if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.BATTLESHIP1 && Count(Point.pointstatus(BATTLESHIP1))<3)) {
-//                    point.setPointStatus(PointStatus.HIT);
-//                    grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
-//                    System.out.println("X");
-//                    return true;
-//                }
-//                if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.BATTLESHIP1 &&  Count(Point.pointstatus(BATTLESHIP1)) == 3)) {
-//                    point.setPointStatus(PointStatus.SUNK);
-//                    grid.getPoint().setPointStatus(PointStatus.SUNK);
-//                    System.out.println("B");
-//                    return true;
-//                }
-//                if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.SUBMARINE1 &&  Count(Point.pointstatus(SUBMARINE1))<2)) {
-//                    point.setPointStatus(PointStatus.HIT);
-//                    grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
-//                    System.out.println("X");
-//                    return true;
-//
-//                    if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.SUBMARINE1 &&   Count(Point.pointstatus(SUBMARINE1))== 2)) {
-//                        Point.setPointStatus(PointStatus.SUNK);
-//                        grid.getPoint().setPointStatus(PointStatus.SUNK);
-//                        System.out.println("S");
-//                        return true;
+//                for (Ship ship : ships) {
+//                    for(Point point : ship.getFields()) {
+//                        if(point.getY() == y && point.getX == x && point.getPointStatus().equals(PointStatus.CARRIER) || point.getPointStatus().equals(PointStatus.BATTLESHIP) || point.getPointStatus().equals(PointStatus.SUBMARINE) ||point.getPointStatus().equals(PointStatus.PATROLBOAT) && point(x,y).equals(Player1.list(ship).point())) {
+//                            for(int i=0; i<ship.getFields().size();i++){
+//                                point().setPointStatus(PointStatus.HIT);
+//                                grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
+//                            }
+//                            List(ship).point.setPointStatus(PointStatus.SUNK);
+//                            grid.getList(ship).point.setPointStatus(PointStatus.SUNK);
+//                            return true;
+//                        }
 //                    }
-//                    if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.PATROLBOAT1 && Count(Point.pointstatus(PATROLBOAT1)<1))) {
-//                        point.setPointStatus(PointStatus.HIT);
-//                        grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
-//                        System.out.println("X");
-//                        return true;
-//                    }
-//                    if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.PATROLBOAT1 && Count(Point.pointstatus(PATROLBOAT1)) == 1)) {
-//                        Point.setPointStatus(PointStatus.SUNK);
-//                        grid.getPoint().setPointStatus(PointStatus.SUNK);
-//                        System.out.println("P");
-//                        return true;
-//                    }
-//
-//                    if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.HIT)){
-//                        point.setPointStatus(PointStatus.HIT);
-//                        grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
-//                        System.out.println("overlapping");
-//                        return  false;
-//                    }
-//
 //                }
 //            }
 //
-//            grid.getPoint(x,y).setPointStatus(PointStatus.EMPTY);
-//            point.setPointStatus(PointStatus.MISSED);
-//            grid.getPoint(x,y).setPointStatus(PointStatus.MISSED);
-//            System.out.println("O");
-//            return  true;
+//
+//
+//            if(side == "computer"){
+//                for (Ship ship : ships) {
+//                    for(Point point : ship.getFields()) {
+//                        if(point.getY() == y && point.getX == x && point.getPointStatus().equals(PointStatus.CARRIER) || point.getPointStatus().equals(PointStatus.BATTLESHIP) || point.getPointStatus().equals(PointStatus.SUBMARINE) ||point.getPointStatus().equals(PointStatus.PATROLBOAT) && point(x,y).equals(Player2.list(ship).point())) {
+//                            for(int i=0; i<ship.getFields().size();i++){
+//                                point().setPointStatus(PointStatus.HIT);
+//                                grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
+//                            }
+//                            List(ship).point.setPointStatus(PointStatus.SUNK);
+//                            grid.getList(ship).point.setPointStatus(PointStatus.SUNK);
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
+//            if(point.getY() == y && point.getX() == x && point.getPointStatus().equals(PointStatus.HIT)){
+//                Point().setPointStatus(PointStatus.HIT);
+//                grid.getPoint(x,y).setPointStatus(PointStatus.HIT);
+//                return  false;
+//            }
 //
 //        }
 //
 //
 //
+//
+//
+//        grid.getPoint(x,y).setPointStatus(PointStatus.EMPTY);
+//        point.setPointStatus(PointStatus.Missed);
+//        grid.getPoint(x,y).setPointStatus(PointStatus.Missed);
+//        return  true;
+//
+//
 //    }
+//
+//
+//
 //}
+
+public class Logic {
+
+
+
+}

@@ -17,7 +17,7 @@ public class Input {
 
     public Input() {
         PlaceShipCarrier();
-        //PlaceShipBattleship();
+//        PlaceShipBattleship();
         //PlaceShipPatrolBoat();
         //PlaceShipSubmarine();
     }
@@ -351,15 +351,31 @@ public class Input {
     }
 
 
-    public int[] shoot(int player) {
+    public int[] InputShoot(int player) {
         int GamePlayer = player + 1;
+
         System.out.println("Player " + GamePlayer + " shoot");
-        System.out.println("select row :");
-        int row = scanner.nextInt();
+
+        System.out.println("Select the column for shoot point:");
+        int col_shoot = TransferToNumber(scanner.next().charAt(0));
         scanner.nextLine();
-        System.out.println("select col: ");
-        int col = scanner.nextInt();
-        return new int[]{row, col};
+
+        System.out.println("Select the row for shoot point:");
+        int row_shoot = scanner.nextInt();
+        scanner.nextLine();
+
+        return new int[]{row_shoot, col_shoot};
+    }
+
+    public int[] GenerateShootForComputer() {
+        int [] Shoot = new int[2];
+        System.out.println("Player 2 shoot");
+        Random r = new Random();
+        int col_shoot = r.nextInt();
+        int row_shoot = r.nextInt();
+        Shoot[0] = row_shoot;
+        Shoot[1] = col_shoot;
+        return Shoot;
     }
     private Integer TransferToNumber(char Character) {
         if (Character == 'A') {
