@@ -42,9 +42,12 @@ public class Game {
         while(GameOn) {
             if(turn == 0) {
                 int[] ShootCoordinatesPlayer1 = input.InputShoot(0);
-                if(!player1.Handleshot(player2.getFleet(), ShootCoordinatesPlayer1, NumOfShipsPlayer2)) {
+                if(player1.Handleshot(player2.getFleet(), ShootCoordinatesPlayer1, NumOfShipsPlayer2)==2) {
                     ShootCoordinatesPlayer1[0] = input.InputShoot(0)[0];
                     ShootCoordinatesPlayer1[1] = input.InputShoot(0)[1];
+                } else if (player1.Handleshot(player2.getFleet(), ShootCoordinatesPlayer1, NumOfShipsPlayer2)==0) {
+                    System.out.println("Missed!");
+                    player2.getGrid().getPoint(ShootCoordinatesPlayer1[0], ShootCoordinatesPlayer1[1]).setPointStatus(PointStatus.MISSED);
                 }
                 player1.updategrid(player1.getFleet());
                 player2.updategrid(player2.getFleet());
@@ -53,9 +56,12 @@ public class Game {
                 display.printPlayergrid(player1.getGrid());
 
                 int[] ShootCoordinatesPlayer2 = input.GenerateShootForComputer();
-                if(!player1.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)) {
+                if(player1.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)==2) {
                     ShootCoordinatesPlayer2[0] = input.GenerateShootForComputer()[0];
                     ShootCoordinatesPlayer2[1] = input.GenerateShootForComputer()[1];
+                } else if (player2.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)==0) {
+                    System.out.println("Missed!");
+                    player1.getGrid().getPoint(ShootCoordinatesPlayer2[0], ShootCoordinatesPlayer2[1]).setPointStatus(PointStatus.MISSED);
                 }
                 player1.updategrid(player1.getFleet());
                 player2.updategrid(player2.getFleet());
@@ -68,9 +74,12 @@ public class Game {
                 }
             } else {
                 int[] ShootCoordinatesPlayer2 = input.GenerateShootForComputer();
-                if(!player1.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)) {
+                if(player1.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)==2) {
                     ShootCoordinatesPlayer2[0] = input.GenerateShootForComputer()[0];
                     ShootCoordinatesPlayer2[1] = input.GenerateShootForComputer()[1];
+                } else if (player2.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)==0) {
+                    System.out.println("Missed!");
+                    player1.getGrid().getPoint(ShootCoordinatesPlayer2[0], ShootCoordinatesPlayer2[1]).setPointStatus(PointStatus.MISSED);
                 }
                 player1.updategrid(player1.getFleet());
                 player2.updategrid(player2.getFleet());
@@ -78,9 +87,12 @@ public class Game {
                 System.out.println("-------------------");
                 display.printPlayergrid(player1.getGrid());
                 int[] ShootCoordinatesPlayer1 = input.InputShoot(0);
-                if(!player1.Handleshot(player1.getFleet(), ShootCoordinatesPlayer1, NumOfShipsPlayer2)) {
+                if(player1.Handleshot(player2.getFleet(), ShootCoordinatesPlayer1, NumOfShipsPlayer2)==2) {
                     ShootCoordinatesPlayer1[0] = input.InputShoot(0)[0];
                     ShootCoordinatesPlayer1[1] = input.InputShoot(0)[1];
+                } else if (player2.Handleshot(player1.getFleet(), ShootCoordinatesPlayer2, NumOfShipsPlayer1)==0) {
+                    System.out.println("Missed!");
+                    player1.getGrid().getPoint(ShootCoordinatesPlayer2[0], ShootCoordinatesPlayer2[1]).setPointStatus(PointStatus.MISSED);
                 }
                 player1.updategrid(player1.getFleet());
                 player2.updategrid(player2.getFleet());

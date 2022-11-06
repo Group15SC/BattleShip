@@ -48,8 +48,8 @@ public class Player {
         }
     }
 
-    public boolean Handleshot(List<Ship> fleet, int [] ShootCoordinator, int NumOfShips) {
-        boolean isshotok = true;
+    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator, int NumOfShips) {
+        int isshotok = 0;  /// default status: missed
         for(Ship ship: fleet) {
             //int Sunkflag = 0;
             for(Point point: ship.getFields()) {
@@ -58,11 +58,12 @@ public class Player {
                             point.getPointStatus()==PointStatus.SUNKB || point.getPointStatus()==PointStatus.SUNKS ||
                             point.getPointStatus()==PointStatus.SUNKP) {
                         System.out.println("Already hit! Give another shot!");
-                        isshotok = false;
+                        isshotok = 2; /// invalid shot
                     } else {
                         point.setPointStatus(PointStatus.HIT);
                         System.out.println("Hit!");
                         ship.setHitcount(ship.getHitcount()+1);
+                        isshotok = 1; /// hit a ship
                     }
                 }
             }
@@ -71,16 +72,19 @@ public class Player {
                     switch(ship.getShipType()) {
                         case CARRIER :
                             point.setPointStatus(PointStatus.SUNKC);
+                            break;
                         case SUBMARINE:
                             point.setPointStatus(PointStatus.SUNKS);
+                            break;
                         case PATROLBOAT:
                             point.setPointStatus(PointStatus.SUNKP);
+                            break;
                         case BATTLESHIP:
                             point.setPointStatus(PointStatus.SUNKB);
+                            break;
                     }
-
                 }
-                System.out.println("You sunk a ship!");
+                //System.out.println("You sunk a ship!");
                 NumOfShips --;
             }
         }

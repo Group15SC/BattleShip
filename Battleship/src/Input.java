@@ -371,8 +371,8 @@ public class Input {
         int [] Shoot = new int[2];
         System.out.println("Player 2 shoot");
         Random r = new Random();
-        int col_shoot = r.nextInt();
-        int row_shoot = r.nextInt();
+        int col_shoot = r.nextInt(10);
+        int row_shoot = r.nextInt(10);
         Shoot[0] = col_shoot;
         Shoot[1] = row_shoot;
         return Shoot;
