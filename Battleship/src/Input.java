@@ -18,8 +18,8 @@ public class Input {
     public Input() {
         PlaceShipCarrier();
         PlaceShipBattleship();
-        PlaceShipPatrolBoat();
-        PlaceShipSubmarine();
+//        PlaceShipPatrolBoat();
+//        PlaceShipSubmarine();
     }
 
 
@@ -32,19 +32,26 @@ public class Input {
         Boolean Flag;
         Flag = true;
         while(Flag) {
-            System.out.println("Select column for the starting coordinator of the ship: ");
-            int col_starting = TransferToNumber(scanner.next().charAt(0));
-            scanner.nextLine();
-            System.out.println("Select row for the starting coordinator of the ship: ");
-            int row_starting = scanner.nextInt();
-            scanner.nextLine();
-
-            System.out.println("Select column for the Ending coordinator of the ship: ");
-            int col_ending = TransferToNumber(scanner.next().charAt(0));
-            scanner.nextLine();
-            System.out.println("Select row for the Ending coordinator of the ship: ");
-            int row_ending = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println("Input Starting and Ending coordinator for the ship: ");
+            Scanner s = new Scanner(System.in);
+            String Coordinator = s.nextLine();
+            int col_starting = Coordinator.charAt(0) - 'A';
+            int row_starting = Coordinator.charAt(1) - '0';
+            int col_ending = Coordinator.charAt(3) - 'A';
+            int row_ending = Coordinator.charAt(4) - '0';
+//            System.out.println("Select column for the starting coordinator of the ship: ");
+//            int col_starting = TransferToNumber(scanner.next().charAt(0));
+//            scanner.nextLine();
+//            System.out.println("Select row for the starting coordinator of the ship: ");
+//            int row_starting = scanner.nextInt();
+//            scanner.nextLine();
+//
+//            System.out.println("Select column for the Ending coordinator of the ship: ");
+//            int col_ending = TransferToNumber(scanner.next().charAt(0));
+//            scanner.nextLine();
+//            System.out.println("Select row for the Ending coordinator of the ship: ");
+//            int row_ending = scanner.nextInt();
+//            scanner.nextLine();
 
 
             if(col_starting == col_ending && col_ending <= 10 && row_ending <= 10 && row_starting <= 10) {
@@ -356,13 +363,18 @@ public class Input {
 
         System.out.println("Player " + GamePlayer + " shoot");
 
-        System.out.println("Select the column for shoot point:");
-        int col_shoot = TransferToNumber(scanner.next().charAt(0));
-        scanner.nextLine();
+        Scanner s = new Scanner(System.in);
+        String Coordinator = s.nextLine();
+        int col_shoot = Coordinator.charAt(0) - 'A';
+        int row_shoot = Coordinator.charAt(1) - '0';
 
-        System.out.println("Select the row for shoot point:");
-        int row_shoot = scanner.nextInt();
-        scanner.nextLine();
+//        System.out.println("Select the column for shoot point:");
+//        int col_shoot = TransferToNumber(scanner.next().charAt(0));
+//        scanner.nextLine();
+//
+//        System.out.println("Select the row for shoot point:");
+//        int row_shoot = scanner.nextInt();
+//        scanner.nextLine();
 
         return new int[]{col_shoot, row_shoot};
     }

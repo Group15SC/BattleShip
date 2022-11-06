@@ -2,6 +2,7 @@ public class Display {
 
     public void printemptygrids() {
         System.out.println("Welcome to Battleship Game!\n");
+        System.out.println("Welcome to Battleship Game!\n");
         printComputergrid(new Grid());
         System.out.println("------------------------");
         printPlayergrid(new Grid());

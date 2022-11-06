@@ -72,7 +72,7 @@ public class Game {
                 for(Ship ship: player1.getFleet()) {
                     Hitpoints1 += ship.getHitcount();
                 }
-                if(Hitpoints1 == 31) {
+                if(Hitpoints1 == 14) {
                     System.out.println("Player 2 wins!");
                     GameOn = false;
                 }
@@ -80,7 +80,7 @@ public class Game {
                 for(Ship ship: player2.getFleet()) {
                     Hitpoints2 += ship.getHitcount();
                 }
-                if(Hitpoints2 == 31) {
+                if(Hitpoints2 == 14) {
                     System.out.println("Player 1 wins!");
                     GameOn = false;
                 }
@@ -116,7 +116,7 @@ public class Game {
                 for(Ship ship: player1.getFleet()) {
                     Hitpoints1 += ship.getHitcount();
                 }
-                if(Hitpoints1 == 31) {
+                if(Hitpoints1 == 14) {
                     System.out.println("Player 2 wins!");
                     GameOn = false;
                 }
@@ -124,7 +124,7 @@ public class Game {
                 for(Ship ship: player2.getFleet()) {
                     Hitpoints2 += ship.getHitcount();
                 }
-                if(Hitpoints2 == 31) {
+                if(Hitpoints2 == 14) {
                     System.out.println("Player 1 wins!");
                     GameOn = false;
                 }

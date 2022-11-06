@@ -19,7 +19,7 @@ public class Player {
     public Player(List<Ship> fleet) {
         this.fleet = fleet;
         this.grid = AddShipsToGrid(fleet);
-        this.NumOfShips = 10;
+        this.NumOfShips = 3;
     }
 
     public List<Ship> getFleet() {
