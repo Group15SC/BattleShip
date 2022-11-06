@@ -5,9 +5,12 @@ public class Ship {
     private List<Point> NewShip;
     private ShipType shipType;
 
-    public Ship(List<Point> fields, ShipType shipType) {
+    private int Hitcount;
+
+    public Ship(List<Point> fields, ShipType shipType, int Hitcount) {
         this.NewShip = fields;
         this.shipType = shipType;
+        this.Hitcount = Hitcount;
     }
 
     public boolean isPlacementOk(Ship ship1, List<Ship> ships) {
@@ -31,7 +34,13 @@ public class Ship {
         return shipType;
     }
 
+    public int getHitcount() {
+        return Hitcount;
+    }
 
+    public void setHitcount(int hitcount) {
+        Hitcount = hitcount;
+    }
 
     public List<Point> getFields() {
         return NewShip;

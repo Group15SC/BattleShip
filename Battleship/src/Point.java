@@ -35,30 +35,30 @@ public class Point {
         return pointStatus;
     }
 
-    public static Ship getShip(Point point, String side){
-        Input input = new Input();
-        Ship target = null;
-        if(side == "human") {
-            List<Ship> player = input.GetPlayer1();
-            for (int j = 0; j < player.size(); j++) {
-                Ship ship = player.get(j);
-                List<Point> field = ship.getFields();
-                if (field.contains(point)) {
-                    target = ship;
-                }
-            }
-        } else if (side == "computer") {
-            List<Ship> player = input.GetPlayer2();
-            for (int i = 0; i < player.size(); i++) {
-                Ship ship = player.get(i);
-                List<Point> field = ship.getFields();
-                if ( field.contains(point)) {
-                    target = ship;
-                }
-            }
-        }
-        return target;
-    }
+//    public static Ship getShip(Point point, String side){
+//        Game game = new Game();
+//        Ship target = null;
+//        if(side == "human") {
+//            List<Ship> player = game.UpdatePlayer1();
+//            for (int j = 0; j < player.size(); j++) {
+//                Ship ship = player.get(j);
+//                List<Point> field = ship.getFields();
+//                if (field.contains(point)) {
+//                    target = ship;
+//                }
+//            }
+//        } else if (side == "computer") {
+//            List<Ship> player = game.UpdatePlayer2();
+//            for (int i = 0; i < player.size(); i++) {
+//                Ship ship = player.get(i);
+//                List<Point> field = ship.getFields();
+//                if ( field.contains(point)) {
+//                    target = ship;
+//                }
+//            }
+//        }
+//        return target;
+//    }
 
     public char getCharacter() {
         char result=' ';

@@ -25,6 +25,8 @@ public class Display {
         } System.out.println();
     }
 
+//    Game game = new Game();
+
     private void playermiddlepart(Grid grid, int x, int y) {
         switch (grid.getPoint(x, y).getCharacter()) {
             case 'E': // if the point is empty, print space
@@ -43,18 +45,20 @@ public class Display {
                 System.out.print(grid.getPoint(x, y).getCharacter() + "|"); // need to replace!!!
                 break;
             case 'K': // for the ships that is sunk, print the initial character
-                ShipType type;
-                type = Point.getShip(grid.getPoint(x, y), "human").getShipType();
-                switch (type) {
-                    case CARRIER:
-                        System.out.print("C" + "|");
-                    case BATTLESHIP:
-                        System.out.print("B" + "|");
-                    case SUBMARINE:
-                        System.out.print("S" + "|");
-                    case PATROLBOAT:
-                        System.out.print("P" + "|");
-                }
+                System.out.print("*" + "|");
+//                ShipType type;
+//                Game game = new Game();
+//                type = game.getShip(grid.getPoint(x, y), "human").getShipType();
+//                switch (type) {
+//                    case CARRIER:
+//                        System.out.print("C" + "|");
+//                    case BATTLESHIP:
+//                        System.out.print("B" + "|");
+//                    case SUBMARINE:
+//                        System.out.print("S" + "|");
+//                    case PATROLBOAT:
+//                        System.out.print("P" + "|");
+//                }
                 break;
             default:
                 System.out.print(" " + "|");
@@ -63,12 +67,14 @@ public class Display {
 
     private void computermiddlepart(Grid grid, int x, int y) {
         switch (grid.getPoint(x, y).getCharacter()) {
-            case 'E': // if the point is empty or placed, print space
+            case 'E':
+                System.out.print(" "+"|");
+                break;// if the point is empty or placed, print space
             case 'C':
             case 'B':
             case 'S':
             case 'P':
-                System.out.print(" "+"|");
+                System.out.print("@"+"|");
                 break;
             case 'H': // if the point is hit, print X
                 System.out.print("X"+"|");
@@ -78,7 +84,8 @@ public class Display {
                 break;
             case 'K': // for the ships that is sunk, print the initial character (how?)
                 ShipType type;
-                type = Point.getShip(grid.getPoint(x, y), "computer").getShipType();
+                Game game = new Game();
+                type = game.getShip(grid.getPoint(x, y), "computer").getShipType();
                 switch (type){
                     case CARRIER:
                         System.out.print("C"+"|");

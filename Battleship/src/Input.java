@@ -17,7 +17,7 @@ public class Input {
 
     public Input() {
         PlaceShipCarrier();
-//        PlaceShipBattleship();
+        //PlaceShipBattleship();
         //PlaceShipPatrolBoat();
         //PlaceShipSubmarine();
     }
@@ -128,7 +128,7 @@ public class Input {
     public void PlaceShipCarrier() {
         /* Player1 User*/
         for(int i = 1; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.CARRIER);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.CARRIER, 0);
 
             System.out.println("Now place Carrier, 6-block long");
             List<Point> StartingAndEndingPointForPlayer = AskStartingAndEndingPointForShip(6);
@@ -157,7 +157,7 @@ public class Input {
         }
         /* Player2 Computer*/
         for(int i = 1; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.CARRIER);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.CARRIER, 0);
 
             List<Point> StartingAndEndingPoint = GenerateStartingAndEndingPointForComputer(6);
             if(StartingAndEndingPoint.get(0).getX() == StartingAndEndingPoint.get(1).getX()) {
@@ -185,7 +185,7 @@ public class Input {
     }
     public void PlaceShipBattleship() {
         for(int i = 2; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.BATTLESHIP);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.BATTLESHIP, 0);
 
             System.out.println("Now place Battleship, 4-block long");
             List<Point> StartingAndEndingPointForPlayer = AskStartingAndEndingPointForShip(4);
@@ -213,7 +213,7 @@ public class Input {
         }
 
         for(int i = 2; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.BATTLESHIP);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.BATTLESHIP, 0);
 
             List<Point> StartingAndEndingPoint = GenerateStartingAndEndingPointForComputer(4);
             if(StartingAndEndingPoint.get(0).getX() == StartingAndEndingPoint.get(1).getX()) {
@@ -241,7 +241,7 @@ public class Input {
     }
     public void PlaceShipSubmarine() {
         for(int i = 3; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.SUBMARINE);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.SUBMARINE, 0);
 
             System.out.println("Now place Submarine, 3-block long");
             List<Point> StartingAndEndingPointForPlayer = AskStartingAndEndingPointForShip(3);
@@ -268,7 +268,7 @@ public class Input {
         }
 
         for(int i = 3; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.SUBMARINE);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.SUBMARINE, 0);
 
             List<Point> StartingAndEndingPoint = GenerateStartingAndEndingPointForComputer(3);
             if(StartingAndEndingPoint.get(0).getX() == StartingAndEndingPoint.get(1).getX()) {
@@ -296,7 +296,7 @@ public class Input {
     }
     public void PlaceShipPatrolBoat() {
         for(int i = 4; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.PATROLBOAT);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.PATROLBOAT, 0);
 
             System.out.println("Now place Patrol Boat, 2-block long");
             List<Point> StartingAndEndingPointForPlayer = AskStartingAndEndingPointForShip(2);
@@ -323,7 +323,7 @@ public class Input {
         }
 
         for(int i = 4; i > 0; i--) {
-            Ship NewShip = new Ship(new ArrayList<>(), ShipType.PATROLBOAT);
+            Ship NewShip = new Ship(new ArrayList<>(), ShipType.PATROLBOAT, 0);
 
             List<Point> StartingAndEndingPoint = GenerateStartingAndEndingPointForComputer(2);
             if(StartingAndEndingPoint.get(0).getX() == StartingAndEndingPoint.get(1).getX()) {
@@ -364,7 +364,7 @@ public class Input {
         int row_shoot = scanner.nextInt();
         scanner.nextLine();
 
-        return new int[]{row_shoot, col_shoot};
+        return new int[]{col_shoot, row_shoot};
     }
 
     public int[] GenerateShootForComputer() {
@@ -373,8 +373,8 @@ public class Input {
         Random r = new Random();
         int col_shoot = r.nextInt();
         int row_shoot = r.nextInt();
-        Shoot[0] = row_shoot;
-        Shoot[1] = col_shoot;
+        Shoot[0] = col_shoot;
+        Shoot[1] = row_shoot;
         return Shoot;
     }
     private Integer TransferToNumber(char Character) {
