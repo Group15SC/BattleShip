@@ -17,9 +17,9 @@ public class Input {
 
     public Input() {
         PlaceShipCarrier();
-        //PlaceShipBattleship();
-        //PlaceShipPatrolBoat();
-        //PlaceShipSubmarine();
+        PlaceShipBattleship();
+        PlaceShipPatrolBoat();
+        PlaceShipSubmarine();
     }
 
 

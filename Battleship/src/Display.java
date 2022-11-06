@@ -138,7 +138,7 @@ public class Display {
                     playermiddlepart(grid, x, y);
                 } else if (x == 9) {
                     playermiddlepart(grid, x, y);
-                    System.out.print("|" + x);
+                    System.out.print(y);
                 } else {
                     playermiddlepart(grid, x, y);
                 }
@@ -168,7 +168,7 @@ public class Display {
                     computermiddlepart(grid, x, y);
                 } else if (x == 9) {
                     computermiddlepart(grid, x, y);
-                    System.out.print("|" + x);
+                    System.out.print(y);
                 } else {
                     computermiddlepart(grid, x, y);
                 }

@@ -5,11 +5,21 @@ public class Player {
     private List<Ship> fleet;
     private Grid grid;
 
-    //Input input = new Input();
+    public void setNumOfShips(int numOfShips) {
+        NumOfShips = numOfShips;
+    }
+
+    private int NumOfShips;
+
+    public int getNumOfShips() {
+        return NumOfShips;
+    }
+//Input input = new Input();
 
     public Player(List<Ship> fleet) {
         this.fleet = fleet;
         this.grid = AddShipsToGrid(fleet);
+        this.NumOfShips = 10;
     }
 
     public List<Ship> getFleet() {
@@ -48,7 +58,7 @@ public class Player {
         }
     }
 
-    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator, int NumOfShips) {
+    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator) {
         int isshotok = 0;  /// default status: missed
         for(Ship ship: fleet) {
             //int Sunkflag = 0;
@@ -85,7 +95,7 @@ public class Player {
                     }
                 }
                 //System.out.println("You sunk a ship!");
-                NumOfShips --;
+//                NumOfShips --;
             }
         }
         return isshotok;
