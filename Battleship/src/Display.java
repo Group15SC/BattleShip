@@ -1,8 +1,19 @@
 public class Display {
 
     public void printemptygrids() {
-        System.out.println("Welcome to Battleship Game!\n");
-        System.out.println("Welcome to Battleship Game!\n");
+        System.out.println();
+        System.out.println("Welcome to BATTLESHIP GAME!");
+        System.out.println("In this game, there are two players. You are Player 1.\n");
+        System.out.println("Each player has a fleet consists of 10 ships:");
+        System.out.println("1 Carrier (6-block long)");
+        System.out.println("2 Battleships (4-block long)");
+        System.out.println("3 Submarines (3-block long)");
+        System.out.println("4 Patrol boats (2-block long)\n");
+        System.out.println("Please follow the hint and enter your coordinate choice(column first)");
+        System.out.println("E.g. A0,A2 (no space)\n");
+        System.out.println("Now, game begins! Have fun!");
+        System.out.println("**************************");
+        System.out.println("");
         printComputergrid(new Grid());
         System.out.println("------------------------");
         printPlayergrid(new Grid());
@@ -78,13 +89,11 @@ public class Display {
     private void computermiddlepart(Grid grid, int x, int y) {
         switch (grid.getPoint(x, y).getCharacter()) {
             case "E":
-                System.out.print(" "+"|");
-                break;// if the point is empty or placed, print space
             case "C":
             case "B":
             case "S":
             case "P":
-                System.out.print("@"+"|");
+                System.out.print(" "+"|");
                 break;
             case "H": // if the point is hit, print X
                 System.out.print("X"+"|");
@@ -117,8 +126,6 @@ public class Display {
 //                    case PATROLBOAT:
 //                        System.out.print("P"+"|");
 //                } break;
-            default:
-                System.out.print(" " + "|");
         }
     }
 

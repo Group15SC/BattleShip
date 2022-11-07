@@ -418,14 +418,16 @@ public class Input {
         for(Ship ship: fleet) {
             //int Sunkflag = 0;
             for(Point point: ship.getFields()) {
+                //System.out.print((char)(point.getX()+'A'));
+                //System.out.println(point.getY());
                 if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]) {
+                    //System.out.println((char)(ShootCoordinator[0]+'A')+ShootCoordinator[1]);
                     switch (point.getPointStatus()) {
                         case HIT:
                         case SUNKP:
                         case SUNKB:
                         case SUNKC:
                         case SUNKS:
-                            System.out.println("Already hit! Give another shot!");
                             isshotok = 2; /// invalid shot
                             break;
                         case SUBMARINE:
@@ -438,27 +440,34 @@ public class Input {
                             isshotok = 1; /// hit a ship
                             break;
                     }
+                    break;
                 }
             }
-            if(ship.getHitcount() == ship.getFields().size()) {
-                for(Point point: ship.getFields()) {
-                    switch(ship.getShipType()) {
-                        case CARRIER :
-                            point.setPointStatus(PointStatus.SUNKC);
-                            break;
-                        case SUBMARINE:
-                            point.setPointStatus(PointStatus.SUNKS);
-                            break;
-                        case PATROLBOAT:
-                            point.setPointStatus(PointStatus.SUNKP);
-                            break;
-                        case BATTLESHIP:
-                            point.setPointStatus(PointStatus.SUNKB);
-                            break;
+            if (isshotok==1) {
+                if(ship.getHitcount() == ship.getFields().size()) {
+                    System.out.println("You sunk a ship!\n");
+                    for(Point point: ship.getFields()) {
+                        switch(ship.getShipType()) {
+                            case CARRIER :
+                                point.setPointStatus(PointStatus.SUNKC);
+                                break;
+                            case SUBMARINE:
+                                point.setPointStatus(PointStatus.SUNKS);
+                                break;
+                            case PATROLBOAT:
+                                point.setPointStatus(PointStatus.SUNKP);
+                                break;
+                            case BATTLESHIP:
+                                point.setPointStatus(PointStatus.SUNKB);
+                                break;
                         }
                     }
                 }
-                //System.out.println("You sunk a ship!");
+                break;
+            } else if (isshotok==2) {
+                break;
+            }
+            //
 //                NumOfShips --;
         }
         return isshotok;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Game {
     Input input = new Input();
+    Display display = new Display();
 
     List<Ship> Fleet1 = input.GetFleet1();
     List<Ship> Fleet2 = input.GetFleet2();
@@ -16,7 +17,7 @@ public class Game {
 //        return Player2;
 //    }
 
-    Display display = new Display();
+
 
     //int NumOfShips = 10;
 //    int NumOfShipsPlayer1 = 10;
@@ -39,12 +40,14 @@ public class Game {
     private void Humanturn() {
         int[] Humanshot = input.InputShoot(0);
         System.out.println("========================");
-        System.out.println("You choose to shoot: ("+(char)(Humanshot[0]+'A')+","+Humanshot[1]+")");
-        while (input.Handleshot(Fleet2, Humanshot) == 2) { //if the input is invalid
+        System.out.println("You choose to shoot: ("+(char)(Humanshot[0]+'A')+Humanshot[1]+")");
+        int shotresult = input.Handleshot(Fleet2, Humanshot);
+        while (shotresult==2) { //if the input is invalid
+            System.out.println("Already hit! Give another shot!");
             Humanshot = input.InputShoot(0); //input again
-            System.out.println("You shoot: ("+Humanshot[0]+Humanshot[1]+")");
+            System.out.println("You shoot: ("+(char)(Humanshot[0]+'A')+Humanshot[1]+")");
         }
-        if (input.Handleshot(Fleet2, Humanshot) == 0) {
+        if (shotresult == 0) {
             System.out.println("Missed!");
             input.player2.getGrid().getPoint(Humanshot[0], Humanshot[1]).setPointStatus(PointStatus.MISSED);
         }
@@ -70,11 +73,14 @@ public class Game {
     private void Computerturn() {
         int[] Computershot = input.GenerateShootForComputer();
         System.out.println("========================");
-        System.out.println("Player2 shoot: ("+(char)(Computershot[0]+'A')+","+Computershot[1]+")");
-        while (input.Handleshot(Fleet1, Computershot) == 2) { //if the input is invalid
+        System.out.println("Player2 chooses to shoot: ("+(char)(Computershot[0]+'A')+Computershot[1]+")");
+        int shotresult = input.Handleshot(Fleet1, Computershot);
+        while (shotresult == 2) { //if the input is invalid
+            System.out.println("Already hit! Give another shot!");
             Computershot = input.GenerateShootForComputer(); //input again
+            System.out.println("New choice: ("+(char)(Computershot[0]+'A')+Computershot[1]+")");
         }
-        if (input.Handleshot(Fleet1, Computershot) == 0) {
+        if (shotresult==0) {
             System.out.println("Missed!");
             input.player1.getGrid().getPoint(Computershot[0], Computershot[1]).setPointStatus(PointStatus.MISSED);
         }

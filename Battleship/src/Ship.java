@@ -39,7 +39,7 @@ public class Ship {
     }
 
     public void setHitcount(int hitcount) {
-        Hitcount = hitcount;
+        this.Hitcount = hitcount;
     }
 
     public List<Point> getFields() {
