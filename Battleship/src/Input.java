@@ -5,21 +5,25 @@ import java.util.Scanner;
 
 
 public class Input {
-    private Scanner scanner = new Scanner(System.in);
+    //Scanner scanner = new Scanner();
 
 //    List<Point> StartingAndEndingPointForPlayer = new ArrayList<>();
 //    List<Point> StartingAndEndingPointForComputer = new ArrayList<>();
 
     /* store the ship list for two Players */
-    private List<Ship> Player1 = new ArrayList<>();
+    public List<Ship> Fleet1 = new ArrayList<>();
+    public List<Ship> Fleet2 = new ArrayList<>();
 
-    private List<Ship> Player2 = new ArrayList<>();
+    Display display = new Display();
+
+    Player player1 = new Player(Fleet1);
+    Player player2 = new Player(Fleet2);
 
     public Input() {
         PlaceShipCarrier();
         PlaceShipBattleship();
-//        PlaceShipPatrolBoat();
-//        PlaceShipSubmarine();
+        PlaceShipPatrolBoat();
+        PlaceShipSubmarine();
     }
 
 
@@ -87,7 +91,7 @@ public class Input {
             if(n1 == 0) {
                 int EndCol = StartCol;
                 int EndRow = StartRow + (len - 1);
-                if(EndRow <= 10) {
+                if(EndRow < 10) {
                     Flag = false;
                     Point starting_point = new Point(StartCol, StartRow, PointStatus.EMPTY);
                     Point ending_point = new Point(EndCol, EndRow, PointStatus.EMPTY);
@@ -98,7 +102,7 @@ public class Input {
             else if(n1 == 1) {
                 int EndCol = StartCol + (len - 1);
                 int EndRow = StartRow;
-                if(EndCol <= 10) {
+                if(EndCol < 10) {
                     Flag = false;
                     Point starting_point = new Point(StartCol, StartRow, PointStatus.EMPTY);
                     Point ending_point = new Point(EndCol, EndRow, PointStatus.EMPTY);
@@ -155,12 +159,17 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.CARRIER));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player1)) {
-                Player1.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet1)) {
+                Fleet1.add(NewShip);
             }
             else {
                 i++;
             }
+            player1.updategrid(player1.getFleet());
+            display.printComputergrid(new Grid());
+            System.out.println("-------------------");
+            display.printPlayergrid(player1.getGrid());
+
         }
         /* Player2 Computer*/
         for(int i = 1; i > 0; i--) {
@@ -181,8 +190,8 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.CARRIER));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player2)) {
-                Player2.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet2)) {
+                Fleet2.add(NewShip);
             }
             else {
                 i++;
@@ -211,12 +220,16 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.BATTLESHIP));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player1)) {
-                Player1.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet1)) {
+                Fleet1.add(NewShip);
             }
             else {
                 i++;
             }
+            player1.updategrid(player1.getFleet());
+            display.printComputergrid(new Grid());
+            System.out.println("-------------------");
+            display.printPlayergrid(player1.getGrid());
         }
 
         for(int i = 2; i > 0; i--) {
@@ -237,8 +250,8 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.BATTLESHIP));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player2)) {
-                Player2.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet2)) {
+                Fleet2.add(NewShip);
             }
             else {
                 i++;
@@ -266,11 +279,17 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.SUBMARINE));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player1)) {
-                Player1.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet1)) {
+                Fleet1.add(NewShip);
             }
             else {
                 i++;
+            }
+            if(i!=1) {
+                player1.updategrid(player1.getFleet());
+                display.printComputergrid(new Grid());
+                System.out.println("-------------------");
+                display.printPlayergrid(player1.getGrid());
             }
         }
 
@@ -292,8 +311,8 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.SUBMARINE));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player2)) {
-                Player2.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet2)) {
+                Fleet2.add(NewShip);
             }
             else {
                 i++;
@@ -321,12 +340,16 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.PATROLBOAT));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player1)) {
-                Player1.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet1)) {
+                Fleet1.add(NewShip);
             }
             else {
                 i++;
             }
+            player1.updategrid(player1.getFleet());
+            display.printComputergrid(new Grid());
+            System.out.println("-------------------");
+            display.printPlayergrid(player1.getGrid());
         }
 
         for(int i = 4; i > 0; i--) {
@@ -347,8 +370,8 @@ public class Input {
                     NewShip.add(new Point(x + j, y, PointStatus.PATROLBOAT));
                 }
             }
-            if(NewShip.isPlacementOk(NewShip, Player2)) {
-                Player2.add(NewShip);
+            if(NewShip.isPlacementOk(NewShip, Fleet2)) {
+                Fleet2.add(NewShip);
             }
             else {
                 i++;
@@ -389,6 +412,55 @@ public class Input {
         Shoot[1] = row_shoot;
         return Shoot;
     }
+
+    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator) {
+        int isshotok = 0;  /// default status: missed
+        for(Ship ship: fleet) {
+            //int Sunkflag = 0;
+            for(Point point: ship.getFields()) {
+                if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]){
+                    if(point.getPointStatus()==PointStatus.HIT || point.getPointStatus()==PointStatus.SUNKC ||
+                            point.getPointStatus()==PointStatus.SUNKB || point.getPointStatus()==PointStatus.SUNKS ||
+                            point.getPointStatus()==PointStatus.SUNKP) {
+                        System.out.println("Already hit! Give another shot!");
+                        isshotok = 2; /// invalid shot
+                    } else {
+                        point.setPointStatus(PointStatus.HIT);
+                        System.out.println("Hit!");
+                        ship.setHitcount(ship.getHitcount()+1);
+                        isshotok = 1; /// hit a ship
+                    }
+                    break;
+                }
+            }
+            if(ship.getHitcount() == ship.getFields().size()) {
+                for(Point point: ship.getFields()) {
+                    switch(ship.getShipType()) {
+                        case CARRIER :
+                            point.setPointStatus(PointStatus.SUNKC);
+                            break;
+                        case SUBMARINE:
+                            point.setPointStatus(PointStatus.SUNKS);
+                            break;
+                        case PATROLBOAT:
+                            point.setPointStatus(PointStatus.SUNKP);
+                            break;
+                        case BATTLESHIP:
+                            point.setPointStatus(PointStatus.SUNKB);
+                            break;
+                    }
+                }
+                //System.out.println("You sunk a ship!");
+//                NumOfShips --;
+            }
+        }
+        return isshotok;
+//        if(NumOfShips == 0) {
+//            GameOver = true;
+//        }
+//        return GameOver;
+    }
+
     private Integer TransferToNumber(char Character) {
         if (Character == 'A') {
             return 0;
@@ -425,12 +497,12 @@ public class Input {
         }
     }
 
-    public List<Ship> GetPlayer1() {
-        return Player1;
+    public List<Ship> GetFleet1() {
+        return Fleet1;
     }
 
-    public List<Ship> GetPlayer2() {
-        return Player2;
+    public List<Ship> GetFleet2() {
+        return Fleet2;
     }
 
 

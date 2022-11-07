@@ -19,7 +19,7 @@ public class Player {
     public Player(List<Ship> fleet) {
         this.fleet = fleet;
         this.grid = AddShipsToGrid(fleet);
-        this.NumOfShips = 3;
+        this.NumOfShips = 10;
     }
 
     public List<Ship> getFleet() {
@@ -58,51 +58,51 @@ public class Player {
         }
     }
 
-    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator) {
-        int isshotok = 0;  /// default status: missed
-        for(Ship ship: fleet) {
-            //int Sunkflag = 0;
-            for(Point point: ship.getFields()) {
-                if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]){
-                    if(point.getPointStatus()==PointStatus.HIT || point.getPointStatus()==PointStatus.SUNKC ||
-                            point.getPointStatus()==PointStatus.SUNKB || point.getPointStatus()==PointStatus.SUNKS ||
-                            point.getPointStatus()==PointStatus.SUNKP) {
-                        System.out.println("Already hit! Give another shot!");
-                        isshotok = 2; /// invalid shot
-                    } else {
-                        point.setPointStatus(PointStatus.HIT);
-                        System.out.println("Hit!");
-                        ship.setHitcount(ship.getHitcount()+1);
-                        isshotok = 1; /// hit a ship
-                    }
-                }
-            }
-            if(ship.getHitcount() == ship.getFields().size()) {
-                for(Point point: ship.getFields()) {
-                    switch(ship.getShipType()) {
-                        case CARRIER :
-                            point.setPointStatus(PointStatus.SUNKC);
-                            break;
-                        case SUBMARINE:
-                            point.setPointStatus(PointStatus.SUNKS);
-                            break;
-                        case PATROLBOAT:
-                            point.setPointStatus(PointStatus.SUNKP);
-                            break;
-                        case BATTLESHIP:
-                            point.setPointStatus(PointStatus.SUNKB);
-                            break;
-                    }
-                }
-                //System.out.println("You sunk a ship!");
-//                NumOfShips --;
-            }
-        }
-        return isshotok;
-//        if(NumOfShips == 0) {
-//            GameOver = true;
+//    public int Handleshot(List<Ship> fleet, int [] ShootCoordinator) {
+//        int isshotok = 0;  /// default status: missed
+//        for(Ship ship: fleet) {
+//            //int Sunkflag = 0;
+//            for(Point point: ship.getFields()) {
+//                if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]){
+//                    if(point.getPointStatus()==PointStatus.HIT || point.getPointStatus()==PointStatus.SUNKC ||
+//                            point.getPointStatus()==PointStatus.SUNKB || point.getPointStatus()==PointStatus.SUNKS ||
+//                            point.getPointStatus()==PointStatus.SUNKP) {
+//                        System.out.println("Already hit! Give another shot!");
+//                        isshotok = 2; /// invalid shot
+//                    } else {
+//                        point.setPointStatus(PointStatus.HIT);
+//                        System.out.println("Hit!");
+//                        ship.setHitcount(ship.getHitcount()+1);
+//                        isshotok = 1; /// hit a ship
+//                    }
+//                }
+//            }
+//            if(ship.getHitcount() == ship.getFields().size()) {
+//                for(Point point: ship.getFields()) {
+//                    switch(ship.getShipType()) {
+//                        case CARRIER :
+//                            point.setPointStatus(PointStatus.SUNKC);
+//                            break;
+//                        case SUBMARINE:
+//                            point.setPointStatus(PointStatus.SUNKS);
+//                            break;
+//                        case PATROLBOAT:
+//                            point.setPointStatus(PointStatus.SUNKP);
+//                            break;
+//                        case BATTLESHIP:
+//                            point.setPointStatus(PointStatus.SUNKB);
+//                            break;
+//                    }
+//                }
+//                //System.out.println("You sunk a ship!");
+////                NumOfShips --;
+//            }
 //        }
-//        return GameOver;
-    }
+//        return isshotok;
+////        if(NumOfShips == 0) {
+////            GameOver = true;
+////        }
+////        return GameOver;
+//    }
 
 }
