@@ -35,38 +35,61 @@ public class Game {
         display.printPlayergrid(AddShipsToGrid(Fleet1));
     }
 
+
+    private void Humanturn() {
+        int[] Humanshot = input.InputShoot(0);
+        System.out.println("========================");
+        System.out.println("You choose to shoot: ("+(char)(Humanshot[0]+'A')+","+Humanshot[1]+")");
+        while (input.Handleshot(Fleet2, Humanshot) == 2) { //if the input is invalid
+            Humanshot = input.InputShoot(0); //input again
+            System.out.println("You shoot: ("+Humanshot[0]+Humanshot[1]+")");
+        }
+        if (input.Handleshot(Fleet2, Humanshot) == 0) {
+            System.out.println("Missed!");
+            input.player2.getGrid().getPoint(Humanshot[0], Humanshot[1]).setPointStatus(PointStatus.MISSED);
+        }
+    }
+
+
+//        if(input.Handleshot(Fleet2, Humanshot)==2) { //invalid input case, ask for another shoot
+//            Humanshot = input.InputShoot(0);
+////                    Humanshot[0] = input.InputShoot(0)[0];
+////                    Humanshot[1] = input.InputShoot(0)[1];
+//        } else if (input.Handleshot(Fleet2, Humanshot)==0) { //the coordinate is not within the fleet, hit empty point
+//            System.out.println("Missed!");
+//            input.player2.getGrid().getPoint(Humanshot[0], Humanshot[1]).setPointStatus(PointStatus.MISSED);
+//        }
+//        //update grid and print out
+//        input.player1.updategrid(Fleet1);
+//        input.player2.updategrid(Fleet2);
+//        display.printComputergrid(input.player2.getGrid());
+//        System.out.println("-------------------");
+//        display.printPlayergrid(input.player1.getGrid());
+//    }
+
+    private void Computerturn() {
+        int[] Computershot = input.GenerateShootForComputer();
+        System.out.println("========================");
+        System.out.println("Player2 shoot: ("+(char)(Computershot[0]+'A')+","+Computershot[1]+")");
+        while (input.Handleshot(Fleet1, Computershot) == 2) { //if the input is invalid
+            Computershot = input.GenerateShootForComputer(); //input again
+        }
+        if (input.Handleshot(Fleet1, Computershot) == 0) {
+            System.out.println("Missed!");
+            input.player1.getGrid().getPoint(Computershot[0], Computershot[1]).setPointStatus(PointStatus.MISSED);
+        }
+    }
+
+
     public void GameOn() {
         Boolean GameOn = true;
         Random r = new Random();
         int turn = r.nextInt(2);
         while(GameOn) {
-            if(turn == 0) {
-                int[] ShootCoordinatesPlayer1 = input.InputShoot(0);
-                if(input.Handleshot(Fleet2, ShootCoordinatesPlayer1)==2) { //human shoot
-                    ShootCoordinatesPlayer1[0] = input.InputShoot(0)[0];
-                    ShootCoordinatesPlayer1[1] = input.InputShoot(0)[1];
-                } else if (input.Handleshot(Fleet2, ShootCoordinatesPlayer1)==0) {
-                    System.out.println("Missed!");
-                    input.player2.getGrid().getPoint(ShootCoordinatesPlayer1[0], ShootCoordinatesPlayer1[1]).setPointStatus(PointStatus.MISSED);
-                } else {
-                    continue;
-                }
-                input.player1.updategrid(Fleet1);
-                input.player2.updategrid(Fleet2);
-                display.printComputergrid(input.player2.getGrid());
-                System.out.println("-------------------");
-                display.printPlayergrid(input.player1.getGrid());
-
-                int[] ShootCoordinatesPlayer2 = input.GenerateShootForComputer();
-                if(input.Handleshot(Fleet1, ShootCoordinatesPlayer2)==2) {
-                    ShootCoordinatesPlayer2[0] = input.GenerateShootForComputer()[0];
-                    ShootCoordinatesPlayer2[1] = input.GenerateShootForComputer()[1];
-                } else if (input.Handleshot(Fleet1, ShootCoordinatesPlayer2)==0) {
-                    System.out.println("Missed!");
-                    input.player1.getGrid().getPoint(ShootCoordinatesPlayer2[0], ShootCoordinatesPlayer2[1]).setPointStatus(PointStatus.MISSED);
-                } else {
-                    continue;
-                }
+            if(turn == 0) { //human shoot first
+                Humanturn();
+                Computerturn();
+                //update grid and print out
                 input.player1.updategrid(Fleet1);
                 input.player2.updategrid(Fleet2);
                 display.printComputergrid(input.player2.getGrid());
@@ -78,6 +101,8 @@ public class Game {
                 }
                 if(Hitpoints1 == 31) {
                     System.out.println("Player 2 wins!");
+                    System.out.println("Player 2's Ocean Grid:");
+                    display.printPlayergrid(input.player2.getGrid());
                     GameOn = false;
                 }
                 int Hitpoints2 = 0;
@@ -85,40 +110,82 @@ public class Game {
                     Hitpoints2 += ship.getHitcount();
                 }
                 if(Hitpoints2 == 31) {
-                    System.out.println("Player 1 wins!");
+                    System.out.println("Congrats! You win!");
                     GameOn = false;
                 }
-            } else {
-                int[] ShootCoordinatesPlayer2 = input.GenerateShootForComputer();
-                if(input.Handleshot(Fleet1, ShootCoordinatesPlayer2)==2) {
-                    ShootCoordinatesPlayer2[0] = input.GenerateShootForComputer()[0];
-                    ShootCoordinatesPlayer2[1] = input.GenerateShootForComputer()[1];
-                } else if (input.Handleshot(Fleet1, ShootCoordinatesPlayer2)==0) {
-                    System.out.println("Missed!");
-                    input.player1.getGrid().getPoint(ShootCoordinatesPlayer2[0], ShootCoordinatesPlayer2[1]).setPointStatus(PointStatus.MISSED);
-                } else {
-                    continue;
-                }
+//                int[] Humanshot = input.InputShoot(0);
+//                if(input.Handleshot(Fleet2, Humanshot)==2) { //invalid input case, ask for another shoot
+//                    Humanshot = input.InputShoot(0);
+////                    Humanshot[0] = input.InputShoot(0)[0];
+////                    Humanshot[1] = input.InputShoot(0)[1];
+//                } else if (input.Handleshot(Fleet2, Humanshot)==0) { //the coordinate is not within the fleet, hit empty point
+//                    System.out.println("Missed!");
+//                    input.player2.getGrid().getPoint(Humanshot[0], Humanshot[1]).setPointStatus(PointStatus.MISSED);
+//                } else {
+//                    continue;
+//                }
+//                input.player1.updategrid(Fleet1);
+//                input.player2.updategrid(Fleet2);
+//                display.printComputergrid(input.player2.getGrid());
+//                System.out.println("-------------------");
+//                display.printPlayergrid(input.player1.getGrid());
+
+//                int[] Computershot = input.GenerateShootForComputer();
+//                if(input.Handleshot(Fleet1, Computershot)==2) {
+//                    Computershot[0] = input.GenerateShootForComputer()[0];
+//                    Computershot[1] = input.GenerateShootForComputer()[1];
+//                } else if (input.Handleshot(Fleet1, Computershot)==0) {
+//                    System.out.println("Missed!");
+//                    input.player1.getGrid().getPoint(Computershot[0], Computershot[1]).setPointStatus(PointStatus.MISSED);
+//                } else {
+//                    continue;
+//                }
+//                input.player1.updategrid(Fleet1);
+//                input.player2.updategrid(Fleet2);
+//                display.printComputergrid(input.player2.getGrid());
+//                System.out.println("-------------------");
+//                display.printPlayergrid(input.player1.getGrid());
+
+            } else { //computer shoot first
+                Computerturn();
+                Humanturn();
                 input.player1.updategrid(Fleet1);
                 input.player2.updategrid(Fleet2);
                 display.printComputergrid(input.player2.getGrid());
                 System.out.println("-------------------");
                 display.printPlayergrid(input.player1.getGrid());
-                int[] ShootCoordinatesPlayer1 = input.InputShoot(0);
-                if(input.Handleshot(Fleet2, ShootCoordinatesPlayer1)==2) {
-                    ShootCoordinatesPlayer1[0] = input.InputShoot(0)[0];
-                    ShootCoordinatesPlayer1[1] = input.InputShoot(0)[1];
-                } else if (input.Handleshot(Fleet2, ShootCoordinatesPlayer1)==0) {
-                    System.out.println("Missed!");
-                    input.player1.getGrid().getPoint(ShootCoordinatesPlayer1[0], ShootCoordinatesPlayer1[1]).setPointStatus(PointStatus.MISSED);
-                } else {
-                    continue;
-                }
-                input.player1.updategrid(Fleet1);
-                input.player2.updategrid(Fleet2);
-                display.printComputergrid(input.player2.getGrid());
-                System.out.println("-------------------");
-                display.printPlayergrid(input.player1.getGrid());
+//                int[] Computershot = input.GenerateShootForComputer();
+//                if(input.Handleshot(Fleet1, Computershot)==2) {
+//                    Computershot[0] = input.GenerateShootForComputer()[0];
+//                    Computershot[1] = input.GenerateShootForComputer()[1];
+//                } else if (input.Handleshot(Fleet1, Computershot)==0) {
+//                    System.out.println("Missed!");
+//                    input.player1.getGrid().getPoint(Computershot[0], Computershot[1]).setPointStatus(PointStatus.MISSED);
+//                } else {
+//                    continue;
+//                }
+//                input.player1.updategrid(Fleet1);
+//                input.player2.updategrid(Fleet2);
+//                display.printComputergrid(input.player2.getGrid());
+//                System.out.println("-------------------");
+//                display.printPlayergrid(input.player1.getGrid());
+//
+//                //human turn
+//                int[] humanshot = input.InputShoot(0);
+//                if(input.Handleshot(Fleet2, humanshot)==2) {
+//                    humanshot[0] = input.InputShoot(0)[0];
+//                    humanshot[1] = input.InputShoot(0)[1];
+//                } else if (input.Handleshot(Fleet2, humanshot)==0) {
+//                    System.out.println("Missed!");
+//                    input.player1.getGrid().getPoint(humanshot[0], humanshot[1]).setPointStatus(PointStatus.MISSED);
+//                } else {
+//                    continue;
+//                }
+//                input.player1.updategrid(Fleet1);
+//                input.player2.updategrid(Fleet2);
+//                display.printComputergrid(input.player2.getGrid());
+//                System.out.println("-------------------");
+//                display.printPlayergrid(input.player1.getGrid());
 
                 int Hitpoints1 = 0;
                 for(Ship ship: Fleet1) {
@@ -138,7 +205,7 @@ public class Game {
                 }
             }
         }
-        System.out.println("Game is over");
+        System.out.println("Game over!");
     }
 
     private List<Grid> GridsOfPlayers = new ArrayList<>();  /*generate two grids*/

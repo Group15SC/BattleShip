@@ -384,7 +384,7 @@ public class Input {
     public int[] InputShoot(int player) {
         int GamePlayer = player + 1;
 
-        System.out.println("Player " + GamePlayer + " shoot");
+        System.out.println("Player " + GamePlayer + " shoot, please enter your choice: (e.g. A0)");
 
         Scanner s = new Scanner(System.in);
         String Coordinator = s.nextLine();
@@ -418,19 +418,26 @@ public class Input {
         for(Ship ship: fleet) {
             //int Sunkflag = 0;
             for(Point point: ship.getFields()) {
-                if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]){
-                    if(point.getPointStatus()==PointStatus.HIT || point.getPointStatus()==PointStatus.SUNKC ||
-                            point.getPointStatus()==PointStatus.SUNKB || point.getPointStatus()==PointStatus.SUNKS ||
-                            point.getPointStatus()==PointStatus.SUNKP) {
-                        System.out.println("Already hit! Give another shot!");
-                        isshotok = 2; /// invalid shot
-                    } else {
-                        point.setPointStatus(PointStatus.HIT);
-                        System.out.println("Hit!");
-                        ship.setHitcount(ship.getHitcount()+1);
-                        isshotok = 1; /// hit a ship
+                if(point.getX()==ShootCoordinator[0] && point.getY()==ShootCoordinator[1]) {
+                    switch (point.getPointStatus()) {
+                        case HIT:
+                        case SUNKP:
+                        case SUNKB:
+                        case SUNKC:
+                        case SUNKS:
+                            System.out.println("Already hit! Give another shot!");
+                            isshotok = 2; /// invalid shot
+                            break;
+                        case SUBMARINE:
+                        case PATROLBOAT:
+                        case CARRIER:
+                        case BATTLESHIP:
+                            point.setPointStatus(PointStatus.HIT);
+                            System.out.println("Hit!");
+                            ship.setHitcount(ship.getHitcount()+1);
+                            isshotok = 1; /// hit a ship
+                            break;
                     }
-                    break;
                 }
             }
             if(ship.getHitcount() == ship.getFields().size()) {
@@ -448,18 +455,19 @@ public class Input {
                         case BATTLESHIP:
                             point.setPointStatus(PointStatus.SUNKB);
                             break;
+                        }
                     }
                 }
                 //System.out.println("You sunk a ship!");
 //                NumOfShips --;
-            }
         }
         return isshotok;
+    }
+
 //        if(NumOfShips == 0) {
 //            GameOver = true;
 //        }
 //        return GameOver;
-    }
 
     private Integer TransferToNumber(char Character) {
         if (Character == 'A') {
